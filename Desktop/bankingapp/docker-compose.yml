@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_bankingapp
+    environment:
+      POSTGRES_DB: bankingdb
+      POSTGRES_USER: bankinguser
+      POSTGRES_PASSWORD: bankingpass
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - banking-net
+
+volumes:
+  postgres_data:
+
+networks:
+  banking-net:
+    driver: bridge
