@@ -1,5 +1,15 @@
 #spring.application.name=core-service
 #
+#spring.datasource.url=jdbc:postgresql://localhost:5433/postgres
+#spring.jpa.properties.hibernate.default_schema=banking_schema
+#
+#spring.datasource.username=postgres
+#spring.datasource.password=3014
+#
+#spring.jpa.hibernate.ddl-auto=update
+#spring.jpa.show-sql=true
+#spring.jpa.properties.hibernate.format_sql=true
+#
 #server.port=8081
 
 server:
@@ -12,7 +22,10 @@ spring:
     password: 3014
   jpa:
     hibernate:
-      ddl-auto: update\
+      ddl-auto: update
     show-sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        default_schema: banking_schema

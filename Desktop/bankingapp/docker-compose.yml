@@ -3,11 +3,11 @@ version: '3.8'
 services:
   postgres:
     image: postgres:15
-    container_name: postgres_bankingapp
+    container_name: postgres-db
     environment:
-      POSTGRES_DB: bankingdb
-      POSTGRES_USER: bankinguser
-      POSTGRES_PASSWORD: bankingpass
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 3014
     ports:
       - "5435:5432"
     volumes:
