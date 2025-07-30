@@ -17,4 +17,8 @@ public interface AccountService {
 
     AccountDto update(String accountNumber, AccountDtoIU dto);
 
+    List<AccountDto> getAll();
+
+    void delete(String accountNumber);
+
 }

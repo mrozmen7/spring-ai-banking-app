@@ -10,11 +10,12 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountDtoIU {
+
     private String customerName;
     private String accountNumber;
     private String accountType;
-    private String currency;
     private BigDecimal balance;
+    private String currency;
     private boolean active;
 }
 

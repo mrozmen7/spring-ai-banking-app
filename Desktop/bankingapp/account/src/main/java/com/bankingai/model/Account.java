@@ -15,23 +15,33 @@ import java.time.LocalDateTime;
 @Builder
 public class Account {
 
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "customer_name", nullable = false)
+    private String customerName;
+
     @Column(name = "account_number", nullable = false, unique = true)
     private String accountNumber;
 
-    @Column(name = "customer_name", nullable = false, unique = true)
-    private String customerName;
+    @Column(name = "account_type")
+    private String accountType;
 
-    private BigDecimal balance; //hesap bakiyesi parasal degerlerde daima kullanilir
+    private BigDecimal balance;
 
     private String currency;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "is_active", nullable = false)
+    @Column(name = "is_active")
     private boolean active;
 }

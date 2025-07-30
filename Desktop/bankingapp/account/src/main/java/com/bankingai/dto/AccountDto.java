@@ -14,10 +14,14 @@ import java.time.LocalDateTime;
 public class AccountDto {
 
     private Long id;
+    private String customerName;
     private String accountNumber;
     private String accountType;
     private BigDecimal balance;
+    private String currency;
     private LocalDateTime createdAt;
+    private boolean active;
+
 }
 
 // kullaniciya verilen degerler

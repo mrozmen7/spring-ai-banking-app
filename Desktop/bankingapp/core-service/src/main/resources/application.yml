@@ -28,4 +28,4 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
       hibernate:
-        default_schema: banking_schema
+        default_schema: core-service
