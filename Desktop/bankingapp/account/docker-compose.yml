@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  account-db:
+    image: postgres:15
+    container_name: account-db
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 3014
+    ports:
+      - "5433:5432"
+    volumes:
+      - account_data:/var/lib/postgresql/data
+    networks:
+      - banking-network
+
+networks:
+  banking-network:
+    driver: bridge
+
+volumes:
+  account_data:
