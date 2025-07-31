@@ -6,15 +6,18 @@ import com.bankingai.dto.AccountDtoIU;
 import com.bankingai.model.Account;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface AccountMapper {
 
-    AccountMapper INSTANCE = Mappers.getMapper(AccountMapper.class);
-
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", expression = "java(java.time.LocalDateTime.now())")
+    @Mapping(target = "createdAt", ignore = true)
     Account toEntity(AccountDtoIU dto);
-    AccountDto toDto(Account entity);
+
+    AccountDto toDto(Account account);
+
+    List<AccountDto> toDtoList(List<Account> accounts);
+
 }

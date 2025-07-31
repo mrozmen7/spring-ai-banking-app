@@ -22,6 +22,9 @@ public class AccountDto {
     private LocalDateTime createdAt;
     private boolean active;
 
+    private Long customerId; // sadece ID tutulu
+;
+
 }
 
 // kullaniciya verilen degerler

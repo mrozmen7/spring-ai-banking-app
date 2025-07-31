@@ -1,5 +1,6 @@
 package com.bankingai.service;
 
+import com.bankingai.client.CustomerServiceClient;
 import com.bankingai.dto.AccountDto;
 import com.bankingai.dto.AccountDtoIU;
 import com.bankingai.mapper.AccountMapper;
@@ -10,17 +11,25 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
+
     private final AccountRepository accountRepository;
     private final AccountMapper accountMapper;
-
+    private final CustomerServiceClient customerServiceClient;
     @Override
     public AccountDto create(AccountDtoIU dto) {
+        // 1. customerId gerçekten var mı kontrolü
+        if (!customerServiceClient.existsById(dto.getCustomerId())) {
+            throw new EntityNotFoundException("Customer not found: " + dto.getCustomerId());
+        }
+
+        // 2. Entity dönüşümü ve kayıt
         Account entity = accountMapper.toEntity(dto);
         Account saved = accountRepository.save(entity);
         return accountMapper.toDto(saved);
@@ -66,16 +75,15 @@ public class AccountServiceImpl implements AccountService {
         existing.setBalance(dto.getBalance());
         existing.setActive(dto.isActive());
 
+        // Müşteri değişimi varsa kontrol
+        if (!Objects.equals(existing.getCustomerId(), dto.getCustomerId())) {
+            if (!customerServiceClient.existsById(dto.getCustomerId())) {
+                throw new EntityNotFoundException("Customer not found: " + dto.getCustomerId());
+            }
+            existing.setCustomerId(dto.getCustomerId());
+        }
+
         Account updated = accountRepository.save(existing);
         return accountMapper.toDto(updated);
-    }
-
-
-    @Override
-    public void delete(String accountNumber) {
-        Account account = accountRepository.findByAccountNumber(accountNumber)
-                .orElseThrow(() -> new EntityNotFoundException("Account not found: " + accountNumber));
-        accountRepository.delete(account);
-
     }
 }

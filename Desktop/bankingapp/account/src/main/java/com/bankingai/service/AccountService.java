@@ -19,6 +19,4 @@ public interface AccountService {
 
     List<AccountDto> getAll();
 
-    void delete(String accountNumber);
-
 }

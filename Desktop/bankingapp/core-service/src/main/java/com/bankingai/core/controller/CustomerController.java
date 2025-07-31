@@ -16,6 +16,15 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
+    @GetMapping("/{id}/exists")
+    public ResponseEntity<Void> existsById(@PathVariable("id") Long id) {
+        if (customerService.existsById(id)) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping
     public ResponseEntity<DtoCustomer> createCustomer(@RequestBody DtoCustomerIU dto) {
         DtoCustomer saved = customerService.saveCustomer(dto);

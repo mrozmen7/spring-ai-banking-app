@@ -50,7 +50,7 @@ public class AccountController {
     // ✅ Hesabı silme (ileride aktiflik yerine yumuşak silme yapılabilir)
     @DeleteMapping("/{accountNumber}")
     public ResponseEntity<Void> delete(@PathVariable String accountNumber) {
-        accountService.delete(accountNumber);
+        accountService.deleteByAccountNumber(accountNumber);
         return ResponseEntity.noContent().build();
     }
 }

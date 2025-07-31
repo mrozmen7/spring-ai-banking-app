@@ -1,6 +1,7 @@
 #spring.application.name=account
 server:
   port: 8082
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
@@ -15,3 +16,7 @@ spring:
     properties:
       hibernate:
         default_schema: account-service
+
+# Mü?teri servisinin adresi buraya yaz?l?r:
+customer-service:
+  url: http://localhost:8081/api/customers
